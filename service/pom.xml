@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>encryptdemo</groupId>
+    <artifactId>main</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>service</artifactId>
+  <name>service</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+   <packaging>war</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+      <dependency>
+          <groupId>encryptdemo</groupId>
+          <artifactId>libraries</artifactId>
+          <version>1.0</version>
+          <type>pom</type>
+      </dependency>
+
+      <dependency>
+          <groupId>encryptdemo</groupId>
+          <artifactId>component</artifactId>
+          <version>1.0</version>
+          <type>pom</type>
+      </dependency>
+
+      <dependency>
+          <groupId>encryptdemo</groupId>
+          <artifactId>model</artifactId>
+          <version>1.0</version>
+          <type>pom</type>
+      </dependency>
+
+      <dependency>
+          <groupId>encryptdemo</groupId>
+          <artifactId>dao</artifactId>
+          <version>1.0</version>
+          <type>pom</type>
+      </dependency>
+
+  </dependencies>
+</project>
