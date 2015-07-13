@@ -9,7 +9,7 @@ import encryptdemo.model.*;
  * You can see how the records are split, so that even having some of the data decrypted will not tell you which names,
  * addresses, and locations go together.
  *
- * I've only partly implemented it.  TODO
+ * 
  * Created by esmiley on 7/12/15.
  */
 public abstract class CardDao {
@@ -67,16 +67,45 @@ public abstract class CardDao {
         }
     }
 
-    // todo modify
-    // todo remove
-    // todo? maybe one to modify the expiration date ONLY?
+    public void modify(Card card){
+        SeedGenerator gen = new SeedGenerator(card.getSeed());
+        byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//TODO we need to add a factory and IOC here
+        try{
+            AESEncypter aes = new AESEncypter(key, gen.getIv());
 
+            BeanCrypt<Address> bca = new BeanCrypt<>();
+            String cryptAddr = bca.encrypt(card.getAddress(), aes);
+            update(gen.getAddressKey(), cryptAddr);
+
+            BeanCrypt<Info> bci = new BeanCrypt<>();
+            String cryptInfo = bci.encrypt(card.getInfo(), aes);
+            update(gen.getInfoKey(), cryptInfo);
+
+            BeanCrypt<Name> bcn = new BeanCrypt<>();
+            String cryptName = bcn.encrypt(card.getName(), aes);
+            update(gen.getNameKey(), cryptName);
+        } catch (Exception e){
+            throw new PersistException(e.getMessage().toString());
+        }
+    }
+
+    public void remove(long seed){
+        SeedGenerator gen = new SeedGenerator(seed);
+        byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//TODO we need to add a factory and IOC here
+        try{
+            AESEncypter aes = new AESEncypter(key, gen.getIv());
+            remove(gen.getAddressKey());
+            remove(gen.getInfoKey());
+            remove(gen.getNameKey());
+        } catch (Exception e){
+            throw new PersistException(e.getMessage().toString());
+        }
+    }
+
+    // implement these primitives in any implementation
     public abstract String select(long key);
-
     public abstract void insert(long key, String data);
-
     public abstract void update(long key, String data);
-
     public abstract void delete(long key, String data);
 
 }
