@@ -68,18 +68,19 @@ public class AESEncypter implements Encrypter {
         return  new String(output);
     }
 
-    public static void main (String[] args){
-        byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-        System.out.println("started, key size " + key.length);
-        byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        AESEncypter a = new AESEncypter(key, iv);
-
-        String s = "funny puppy\u0000";
-        String crypt = a.crypt(s);
-
-        System.out.println("crypt=>" + crypt);
-        System.out.println("decrypt=>" + a.decrypt(crypt) + " " + a.decrypt(crypt).equals(s));
-
-
-    }
+    // Usage example
+//    public static void main (String[] args){
+//        byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+//        //System.out.println("started, key size " + key.length);
+//        byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+//        AESEncypter a = new AESEncypter(key, iv);
+//
+//        String s = "funny puppy\u0000";
+//        String crypt = a.crypt(s);
+//
+//        //System.out.println("crypt=>" + crypt);
+//        //System.out.println("decrypt=>" + a.decrypt(crypt) + " " + a.decrypt(crypt).equals(s));
+//
+//
+//    }
 }

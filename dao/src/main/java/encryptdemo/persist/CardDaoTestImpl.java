@@ -13,15 +13,19 @@ import java.util.concurrent.*;
  * Created by esmiley on 7/13/15.
  */
 public class CardDaoTestImpl extends CardDao {
-    private static final Map<Long, String> internalMap = new ConcurrentHashMap<>();
+    static final Map<Long, String> internalMap = new ConcurrentHashMap<>();
 
     @Override
     public String select(long key) {
+        //System.out.println("select " +internalMap.keySet());
+        //System.out.println("select key " +key);
         return internalMap.get(key);
     }
 
     @Override
     public void insert(long key, String data) {
+        //System.out.println("insert " +internalMap.keySet());
+        //System.out.println("insert key " +key);
         internalMap.put(key, data);
     }
 

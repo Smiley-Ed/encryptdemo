@@ -11,13 +11,13 @@ import java.util.*;
 public class StubEncrypter implements Encrypter{
     @Override
     public String crypt(String plaintext) {
-        System.out.println("NOT ENCRYPTED FOR DEMONSTRATION");
+        //System.out.println("NOT ENCRYPTED FOR DEMONSTRATION");
         return plaintext;
     }
 
     @Override
     public String decrypt(String encryptedtext) {
-        System.out.println("NOT DECRYPTED FOR DEMONSTRATION");
+        //System.out.println("NOT DECRYPTED FOR DEMONSTRATION");
         return encryptedtext;
     }
 

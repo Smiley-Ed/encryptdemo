@@ -47,4 +47,41 @@ public class SeedGenerator {
     public void setIv(byte[] iv) {
         this.iv = iv;
     }
+
+    @Override
+    public String toString() {
+        return "SeedGenerator{" +
+                "seed=" + seed +
+                ", addressKey=" + addressKey +
+                ", infoKey=" + infoKey +
+                ", nameKey=" + nameKey +
+                ", iv=" + Arrays.toString(iv) +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SeedGenerator that = (SeedGenerator) o;
+
+        if (addressKey != that.addressKey) return false;
+        if (infoKey != that.infoKey) return false;
+        if (nameKey != that.nameKey) return false;
+        if (seed != that.seed) return false;
+        if (!Arrays.equals(iv, that.iv)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (seed ^ (seed >>> 32));
+        result = 31 * result + (int) (addressKey ^ (addressKey >>> 32));
+        result = 31 * result + (int) (infoKey ^ (infoKey >>> 32));
+        result = 31 * result + (int) (nameKey ^ (nameKey >>> 32));
+        result = 31 * result + (iv != null ? Arrays.hashCode(iv) : 0);
+        return result;
+    }
 }

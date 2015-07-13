@@ -53,7 +53,7 @@ public class AESEncypterTest extends TestCase {
         try {
             String en = aes.crypt(null);
         } catch (Exception e){
-//            System.out.println(e);
+//            //System.out.println(e);
             fail = false;
         }
         if (fail) fail("should throw an exception if null");
@@ -71,7 +71,7 @@ public class AESEncypterTest extends TestCase {
             try {
                 String en = aes.decrypt(s);
             } catch (Exception e){
-//                System.out.println(e);
+//                //System.out.println(e);
                 fail = false;
             }
             if (fail) fail("should throw an exception if Null input buffer, IllegalBlockSizeException");

@@ -5,6 +5,7 @@ import java.util.*;
 
 import encryptdemo.crypt.*;
 import encryptdemo.model.Address;
+import encryptdemo.persist.factory.PersistenceFactory;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
@@ -32,7 +33,10 @@ public class BeanCrypt<T>{
     }
 
     public void decrypt(T t, String s, Encrypter crypter) throws InvocationTargetException, IllegalAccessException{
+        //System.out.println("DEBUG decrypt " + s);
         String data = crypter.decrypt(s);
+        //System.out.println("DEBUG decrypt " + data);
+
         Map<String, String> map = new HashMap<>();
         String[] a = data.split("\u0000");
         for (int i =0; i<a.length-1; i +=2){
@@ -41,31 +45,31 @@ public class BeanCrypt<T>{
         BeanUtils.populate(t, map);
     }
 
-    /**
-     * This is an example of usage.
-     * @param args
-     */
-    public static void main (String[] args){
-        BeanCrypt<Address> bc = new BeanCrypt<>();
-        Address address = new Address("x1", "x2", "x3", "x4");
-        try {
-            // normally we'd be getting some of this from somewhere else
-            // ...get some bogus values to demonstrate with...
-            byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            AESEncypter a = new AESEncypter(key, iv);
-            String s = bc.encrypt(address, a);
-            System.out.println("crypted address=" + s);
-            Address a2 = new Address();
-            bc.decrypt(a2,s,a);
-            System.out.println( "decrypted address=" + a2);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    /**
+//     * This is an example of usage.
+//     * @param args
+//     */
+//
+//    public static void main (String[] args){
+//        BeanCrypt<Address> bc = new BeanCrypt<>();
+//        Address address = new Address("x1", "x2", "x3", "x4");
+//        try {
+//            // normally we'd be getting some of this from somewhere else
+//            // ...get some bogus values to demonstrate with...
+//            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+//            Encrypter encrypter = PersistenceFactory.getEncrypter(iv);//new AESEncypter(key, iv);
+//            String s = bc.encrypt(address, encrypter);
+//            //System.out.println("crypted address=" + s);
+//            Address a2 = new Address();
+//            bc.decrypt(a2,s,encrypter);
+//            //System.out.println( "decrypted address=" + a2);
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 }
