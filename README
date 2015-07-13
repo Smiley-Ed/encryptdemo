@@ -1,0 +1,66 @@
+README
+Ed Smiley July 12, 2015
+=======================
+Introduction
+------------
+
+This is a a partial, simplified demo system to store credit cards for recurring billing and shopping cart
+applications.  It's probably obsolete from the standpoint of having good third party vendors for this purpose.
+In the bad old days, gateways only provided credit card AuthN and AuthZ, but no usable secure storage.
+
+It does, however, demo certain concepts such as data encryption, key generation, Luhn checks, binary encrypted data
+representation, etc.  So I decided it was worth while from a pedagogical perspective.
+
+It does not involve itself in application level concerns.
+
+It's similar to part of a complete production system I designed long ago, but I coded it from scratch this weekend,
+and made some improvements in some areas.
+
+It also LEAVES OUT some key parts to keep the code small: there's no persistence implemented,
+although to do so you just have to implement 4 methods, and add the SQL or NOSQL database of your choice, even raw Hadoop
+records, since the format for persisting all objects is a long unique id and an encrypted  data chunk in base 64 encoding.
+In addition, this does not get client authentication, nor into JCE setup, so that you can use full 256 bit (rather than
+128 bit) encryption, as you would want to in a production system.
+
+WARNING
+-------
+THIS IS A code example DEMO, NO WARRANTY OR LIABILITY OF ANY KIND IS IMPLIED.
+I WILL NOT be providing any support for this, so you are strictly on your own.
+Feel free to make use of the code, but please give credit, and be prepared to think through all security implications.
+
+Overview
+--------
+This is a multi-part Maven project written in Java with the following submodules:
+* component - the main code
+* dao - the persistence framework
+* libraries - a pom submodule for specifying dependencies in one place
+* model - the model pojos
+* service - a RESTful service layer to be consumed by the client
+
+Typical Usage
+-------------
+A publicly accessible, and ethical application (e.g. most likely a web application) can process a request to store a
+user's credit card information.  Instead of storing this in a database to which it has access, it stores the
+user id and a long unique id alone, and calls this service on a hardened node(s) behind a firewall, which has sole access
+to a persistence layer, also behind a firewall, to store the credit card.
+
+The credit card information is split into three groups of data.  For example the cardholder name, the zip/postal code,
+and the credit card number are all in separate encrypted records.  The records are not connected relationally.
+
+Any subsequent access, is made through the long unique id alone, to minimize transmission of the card information.
+
+If you need to do something of this kind, PLEASE consider using a vendor's API rather than implementing this on your own.
+
+ANOTHER WARNING
+---------------
+If you DO need to do actually implement something of this kind, or use the code concepts for some related application, please
+consider the following at a minimum: the security of keys(!), the security of Java compiled code, client authentication,
+access to the credit card storage service nodes, plaintext logging of data that should remain encrypted, using full 256 bit encryption,
+credit card storage database security and administrative passwords.
+
+
+
+
+
+
+
