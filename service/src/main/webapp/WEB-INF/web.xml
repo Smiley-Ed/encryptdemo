@@ -14,11 +14,6 @@
         <param-value>WEB-INF/beans.xml</param-value>
     </context-param>
 
-    <listener>
-        <listener-class>
-            com.ebrary.core.service.ComponentHook
-        </listener-class>
-    </listener>
 
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
