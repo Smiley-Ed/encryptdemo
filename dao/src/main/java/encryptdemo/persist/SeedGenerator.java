@@ -2,6 +2,7 @@ package encryptdemo.persist;
 
 import java.nio.*;
 import java.security.*;
+import java.util.*;
 
 /**
  * This generates primary keys for the three types of data.
@@ -13,16 +14,18 @@ public class SeedGenerator {
     private long addressKey;
     private long infoKey;
     private long nameKey;
-    private byte[] iv = new byte[16];
+    private byte[] iv;
+    private static final long[] seedingArray = {-3811693139333175852L,
+        6924023134732403504L, 3172965400344830343L, -8802874021872668068L};
 
     public SeedGenerator(long seed){
         this.seed = seed;
-        byte[] bytes = ByteBuffer.allocate(8).putLong(seed).array();
-        SecureRandom rand = new SecureRandom(bytes);
-        addressKey = rand.nextLong();
-        infoKey = rand.nextLong();
-        nameKey = rand.nextLong();
-        rand.nextBytes(iv);
+
+        // overflow is fine, don't worry, be happy!
+        addressKey = seed * seedingArray[0];
+        infoKey = seed * seedingArray[1];
+        nameKey = seed * seedingArray[2];
+        iv = ByteBuffer.allocate(16).putLong(seed * seedingArray[3]).array();
     }
 
     public long getAddressKey(){
