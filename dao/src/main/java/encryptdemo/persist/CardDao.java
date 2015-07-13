@@ -9,7 +9,7 @@ import encryptdemo.model.*;
  * You can see how the records are split, so that even having some of the data decrypted will not tell you which names,
  * addresses, and locations go together.
  *
- * 
+ *
  * Created by esmiley on 7/12/15.
  */
 public abstract class CardDao {
@@ -94,9 +94,9 @@ public abstract class CardDao {
         byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//TODO we need to add a factory and IOC here
         try{
             AESEncypter aes = new AESEncypter(key, gen.getIv());
-            remove(gen.getAddressKey());
-            remove(gen.getInfoKey());
-            remove(gen.getNameKey());
+            delete(gen.getAddressKey());
+            delete(gen.getInfoKey());
+            delete(gen.getNameKey());
         } catch (Exception e){
             throw new PersistException(e.getMessage().toString());
         }
@@ -106,6 +106,6 @@ public abstract class CardDao {
     public abstract String select(long key);
     public abstract void insert(long key, String data);
     public abstract void update(long key, String data);
-    public abstract void delete(long key, String data);
+    public abstract void delete(long key);
 
 }
