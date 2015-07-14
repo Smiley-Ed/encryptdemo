@@ -13,7 +13,6 @@ public class Info {
     private String cvv;
     private String expiration;
     private String type;
-    private String last4;
 
     public Info(){} // streaming
 
@@ -23,11 +22,6 @@ public class Info {
         this.expiration = expiration;
         this.cvv = cvv;
         int len = number.length();
-        if (len<4){
-            last4 = "****";
-        } else {
-            last4 =  number.substring(len-4);
-        }
     }
 
     public String getNumber(){
@@ -62,13 +56,28 @@ public class Info {
         this.type = type;
     }
 
+    /**
+     * Very IMPORTANT. Full number suppressed!
+     *
+     * @return representation that DOES NOT contain the FULL CREDIT CARD number, just the type, last 4 and expiration.
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Card: ");
         sb.append(getType());
         sb.append(' ');
+        String last4;
+        int len = number.length();
+        if (len<4){
+            last4 = "****";
+        } else {
+            last4 =  number.substring(len-4);
+        }
+
         sb.append(last4);
+        sb.append(' ');
+        sb.append(expiration);
         return sb.toString();
     }
 
@@ -81,7 +90,6 @@ public class Info {
 
         if (cvv != null ? !cvv.equals(info.cvv) : info.cvv != null) return false;
         if (expiration != null ? !expiration.equals(info.expiration) : info.expiration != null) return false;
-//        if (last4 != null ? !last4.equals(info.last4) : info.last4 != null) return false;
         if (number != null ? !number.equals(info.number) : info.number != null) return false;
         if (type != null ? !type.equals(info.type) : info.type != null) return false;
 
@@ -94,7 +102,6 @@ public class Info {
         result = 31 * result + (cvv != null ? cvv.hashCode() : 0);
         result = 31 * result + (expiration != null ? expiration.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (last4 != null ? last4.hashCode() : 0);
         return result;
     }
 }

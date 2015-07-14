@@ -2,7 +2,6 @@
  * Created by esmiley on 7/13/15.
  */
 package encryptdemo.persist;
-import java.util.*;
 import junit.framework.TestCase;
 
 import encryptdemo.model.*;
@@ -22,10 +21,8 @@ public class CardDaoTest extends TestCase{
         assert(card.getSeed()==card2.getSeed());
         assert(card.getName().equals(card2.getName()));
         assert(card.getAddress().equals(card2.getAddress()));
-//        assert(card.getInfo().equals(card2.getInfo()));
-        //System.out.println("CARD\n" + card);
-        //System.out.println("CARD 2\n" + card2);
-//        assertTrue(card2.toString(), card.equals(card2));
+        assert(card.getInfo().equals(card2.getInfo()));
+        assertTrue(card2.toString(), card.equals(card2));
     }
 
     public void testCreateModifyRead(){
