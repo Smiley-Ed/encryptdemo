@@ -34,21 +34,18 @@
           <groupId>encryptdemo</groupId>
           <artifactId>component</artifactId>
           <version>1.0</version>
-          <type>pom</type>
       </dependency>
 
       <dependency>
           <groupId>encryptdemo</groupId>
           <artifactId>model</artifactId>
           <version>1.0</version>
-          <type>pom</type>
       </dependency>
 
       <dependency>
           <groupId>encryptdemo</groupId>
           <artifactId>dao</artifactId>
           <version>1.0</version>
-          <type>pom</type>
       </dependency>
 
   </dependencies>
