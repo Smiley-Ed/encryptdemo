@@ -16,7 +16,7 @@ import encryptdemo.persist.factory.PersistenceFactory;
  */
 public abstract class CardDao {
 
-    public void create(Card card){
+    public void create(Card card) throws PersistException{
         SeedGenerator gen = new SeedGenerator(card.getSeed());
         try{
             Encrypter aes = PersistenceFactory.getEncrypter( gen.getIv());
@@ -37,7 +37,7 @@ public abstract class CardDao {
         }
     }
 
-    public Card read(long seed){
+    public Card read(long seed) throws PersistException{
         try{
             SeedGenerator gen = new SeedGenerator(seed);
             Encrypter aes = PersistenceFactory.getEncrypter( gen.getIv());
@@ -70,7 +70,7 @@ public abstract class CardDao {
         }
     }
 
-    public void modify(Card card){
+    public void modify(Card card) throws PersistException{
         try{
             SeedGenerator gen = new SeedGenerator(card.getSeed());
             Encrypter aes = PersistenceFactory.getEncrypter( gen.getIv());
@@ -91,7 +91,7 @@ public abstract class CardDao {
         }
     }
 
-    public void remove(long seed){
+    public void remove(long seed) throws PersistException{
         try{
             SeedGenerator gen = new SeedGenerator(seed);
             Encrypter aes = PersistenceFactory.getEncrypter( gen.getIv());
