@@ -7,7 +7,7 @@
     <artifactId>main</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>dao</artifactId>
+  <artifactId>encryptdemo-dao</artifactId>
   <name>dao</name>
   <url>http://maven.apache.org</url>
   <properties>
