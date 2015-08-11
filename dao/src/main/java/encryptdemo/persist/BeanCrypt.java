@@ -50,26 +50,26 @@ public class BeanCrypt<T>{
 //     * @param args
 //     */
 //
-//    public static void main (String[] args){
-//        BeanCrypt<Address> bc = new BeanCrypt<>();
-//        Address address = new Address("x1", "x2", "x3", "x4");
-//        try {
-//            // normally we'd be getting some of this from somewhere else
-//            // ...get some bogus values to demonstrate with...
-//            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-//            Encrypter encrypter = PersistenceFactory.getEncrypter(iv);//new AESEncypter(key, iv);
-//            String s = bc.encrypt(address, encrypter);
-//            //System.out.println("crypted address=" + s);
-//            Address a2 = new Address();
-//            bc.decrypt(a2,s,encrypter);
-//            //System.out.println( "decrypted address=" + a2);
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    public static void main (String[] args){
+        BeanCrypt<Address> bc = new BeanCrypt<>();
+        Address address = new Address("x1", "x2", "x3", "x4");
+        try {
+            // normally we'd be getting some of this from somewhere else
+            // ...get some bogus values to demonstrate with...
+            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            Encrypter encrypter = PersistenceFactory.getEncrypter(iv);//new AESEncypter(key, iv);
+            String s = bc.encrypt(address, encrypter);
+            //System.out.println("crypted address=" + s);
+            Address a2 = new Address();
+            bc.decrypt(a2,s,encrypter);
+            //System.out.println( "decrypted address=" + a2);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
