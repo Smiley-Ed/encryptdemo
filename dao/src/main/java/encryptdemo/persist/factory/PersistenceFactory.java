@@ -10,8 +10,9 @@ import encryptdemo.persist.*;
 public class PersistenceFactory {
     private PersistenceFactory(){}
 
-    public static Encrypter getEncrypter(byte[] iv){ //iv is different fo reach persistence instance
-        byte[] key = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//TODO IoC for key
+    public static Encrypter getEncrypter(byte[] iv){ //iv is different for each persistence instance
+        byte[] key = //{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };//TODO IoC for key
+        KeyHelper.create(SpringFactoryHelper.getKey().getKeyString());
         return new AESEncypter(key, iv);
     }
 
