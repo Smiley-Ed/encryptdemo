@@ -8,6 +8,7 @@ public class KeyHelper {
     private KeyHelper(){}
 
     public static byte[] create(String keyString){
+
         byte[] b = new byte[BYTES_IN_KEY];
         if (keyString==null || keyString.isEmpty()){
             throw new IllegalArgumentException("unable to generate for empty or null string");
